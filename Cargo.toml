@@ -1,0 +1,13 @@
+[package]
+name = "clgl"
+version = "0.1.0"
+authors = ["Melker Widén"]
+edition = "2021"
+description = "clgl is a small and lightweight command-line graphics library."
+readme = "./README.md"
+homepage = "https://github.com/memagu/clgl/"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
