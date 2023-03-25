@@ -2,19 +2,20 @@ use crate::canvas::Canvas;
 
 /// Sets all pixels of a Canvas object to the chosen brightness value.
 pub fn fill(canvas: &mut Canvas, brightness: f64) {
-    for x in 0..canvas.width() {
-        for y in 0..canvas.height() {
-            let x: f64 = x as f64;
-            let y: f64 = y as f64;
-            canvas.set_pixel(x, y, brightness)
-        }
-    }
+    canvas.map_pixels(|_| brightness);
 }
 
 /// Draws a rectangle with specified top-left corner, width and height on a Canvas object.
-pub fn rectangle(canvas: &mut Canvas, corner_x: f64, corner_y: f64, width: f64, height: f64, brightness: f64) {
+pub fn rectangle(
+    canvas: &mut Canvas,
+    corner_x: f64,
+    corner_y: f64,
+    width: f64,
+    height: f64,
+    brightness: f64,
+) {
     for dx in 0..width as usize {
-        for dy in 0..height as usize{
+        for dy in 0..height as usize {
             let x: f64 = corner_x + dx as f64;
             let y: f64 = corner_y + dy as f64;
             if canvas.in_canvas(x, y) {

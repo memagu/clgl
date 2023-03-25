@@ -12,7 +12,7 @@ impl Canvas {
         Self {
             width,
             height,
-            pixels: vec!(0.0f64; (width * height) as usize),
+            pixels: vec![0.0f64; (width * height) as usize],
             charset,
         }
     }
@@ -40,6 +40,13 @@ impl Canvas {
 
         let pixel_index: usize = self.coordinate_to_pixel_index(x, y);
         self.pixels[pixel_index] = brightness;
+    }
+
+    /// Apply a function to all pixels.
+    pub fn map_pixels(&mut self, func: impl Fn(f64) -> f64) {
+        for pixel_value in self.pixels.iter_mut() {
+            *pixel_value = func(*pixel_value);
+        }
     }
 
     /// Resize canvas.
@@ -76,4 +83,3 @@ impl Canvas {
         y as usize * self.width + x as usize
     }
 }
-
