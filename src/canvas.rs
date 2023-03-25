@@ -62,7 +62,7 @@ impl Canvas {
 
     /// Check if a coordinate (x, y) is within Canvas bounds.
     pub fn in_canvas(&self, x: f64, y: f64) -> bool {
-        0.0f64 <= x && x < self.width as f64 - 1.0f64 && 0.0f64 <= y && y < self.height as f64 - 1.0f64
+        0.0f64 <= x && x < self.width as f64 && 0.0f64 <= y && y < self.height as f64
     }
 
     /// Returns character corresponding to a specified brightness value.
