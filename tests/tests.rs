@@ -2,8 +2,10 @@
 mod lib_test {
     use clgl::canvas;
     use clgl::draw;
+    use clgl::tools;
 
-    const CHARSET: &[u8] = b" .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+    const CHARSET: &[u8] =
+        b" .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
     #[test]
     fn test_test() {
@@ -90,5 +92,15 @@ mod lib_test {
         draw::line(&mut c, 0.0f64, 16.0f64, 0.0f64, 31.0f64, 0.3f64);
         draw::line(&mut c, -10.0f64, 16.0f64, 10.0f64, 31.0f64, 0.1f64);
         c.render();
+    }
+
+    #[test]
+    fn test_tools_clear_terminal() {
+        tools::clear_terminal();
+    }
+
+    #[test]
+    fn test_tools_reset_cursor_position() {
+        tools::reset_cursor_position();
     }
 }
