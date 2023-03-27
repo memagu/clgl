@@ -61,7 +61,7 @@ impl Canvas {
         let mut render_string = String::new();
         for (i, pixel_value) in self.pixels.iter().enumerate() {
             render_string.push(self.brightness_to_char(*pixel_value));
-            if i % (self.width - 1) == 0 {
+            if (i + 1) % self.width == 0 {
                 render_string.push('\n');
             }
         }
