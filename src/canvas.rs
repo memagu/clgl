@@ -58,12 +58,14 @@ impl Canvas {
 
     /// Renders the canvas to stdout.
     pub fn render(&self) {
+        let mut render_string = String::new();
         for (i, pixel_value) in self.pixels.iter().enumerate() {
-            print!("{}  ", self.brightness_to_char(*pixel_value));
-            if (i + 1) % self.width == 0 {
-                println!()
+            render_string.push(self.brightness_to_char(*pixel_value));
+            if i % (self.width - 1) == 0 {
+                render_string.push('\n');
             }
         }
+        print!("{}", render_string);
     }
 
     /// Checks if a coordinate (x, y) is within Canvas bounds.
@@ -72,9 +74,9 @@ impl Canvas {
     }
 
     /// Returns character corresponding to a specified brightness value.
-    fn brightness_to_char(&self, brightness: f64) -> String {
+    fn brightness_to_char(&self, brightness: f64) -> char {
         let char_index: usize = (brightness * ((self.charset.len() - 1) as f64)) as usize;
-        (self.charset[char_index] as char).to_string()
+        self.charset[char_index] as char
     }
 
     /// Flattens a coordinate (x, y) to a index.
