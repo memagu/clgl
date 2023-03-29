@@ -1,4 +1,4 @@
-use std::io::{self, BufWriter, Write};
+use std::io::{self, Write};
 
 /// Canvas struct.
 pub struct Canvas {
