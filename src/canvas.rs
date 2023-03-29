@@ -40,10 +40,10 @@ impl Canvas {
         self.pixels[pixel_index] = brightness.clamp(0.0f64, 1.0f64);
     }
 
-    /// Applies a function to all pixels.
+    /// Applies a function to all pixels. The returned value of the provided function is clamped between 0 and 1.
     pub fn map_pixels(&mut self, func: impl Fn(f64) -> f64) {
         for pixel_value in self.pixels.iter_mut() {
-            *pixel_value = func(*pixel_value);
+            *pixel_value = func(*pixel_value).clamp(0.0f64, 1.0f64);
         }
     }
 
