@@ -111,5 +111,4 @@ pub fn line(canvas: &mut Canvas, x1: f64, y1: f64, x2: f64, y2: f64, brightness:
             canvas.set_pixel(x, y, brightness);
         }
     }
-
 }
