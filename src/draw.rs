@@ -91,12 +91,25 @@ pub fn line(canvas: &mut Canvas, x1: f64, y1: f64, x2: f64, y2: f64, brightness:
     let k: f64 = dy / dx;
     let m: f64 = y1 - k * x1;
 
-    for x in 0..canvas.width() {
-        let x: f64 = x as f64;
-        let y: f64 = k * x + m;
+    if k.abs() <= 1.0f64 {
+        for x in 0..canvas.width() {
+            let x: f64 = x as f64;
+            let y: f64 = k * x + m;
+
+            if canvas.in_canvas(x, y) {
+                canvas.set_pixel(x, y, brightness);
+            }
+        }
+        return;
+    }
+
+    for y in 0..canvas.height() {
+        let y: f64 = y as f64;
+        let x: f64 = (y - m) / k;
 
         if canvas.in_canvas(x, y) {
             canvas.set_pixel(x, y, brightness);
         }
     }
+
 }
