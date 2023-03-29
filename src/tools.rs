@@ -1,9 +1,11 @@
+use std::io::{self, Write};
+
 /// Clears the terminal.
 pub fn clear_terminal() {
-    print!("\x1b[2J");
+    io::stdout().write_all(b"\x1b[2J").unwrap();
 }
 
-/// Sets the cursors position to the top-left corner in the termnal.
+/// Sets the cursors position to the top-left corner in the terminal.
 pub fn reset_cursor_position() {
-    print!("\x1b[H");
+    io::stdout().write_all(b"\x1b[H").unwrap();
 }
