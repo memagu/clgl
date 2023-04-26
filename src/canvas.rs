@@ -6,6 +6,7 @@ pub struct Canvas {
     height: usize,
     pixels: Vec<f64>,
     charset: &'static [u8],
+    pub equalize_row_column_spacing: bool,
 }
 
 impl Canvas {
@@ -16,6 +17,7 @@ impl Canvas {
             height,
             pixels: vec![0.0f64; (width * height) as usize],
             charset,
+            equalize_row_column_spacing: false,
         }
     }
 
@@ -44,7 +46,7 @@ impl Canvas {
     pub fn map_pixels(&mut self, func: impl Fn(f64) -> f64) {
         for pixel_value in self.pixels.iter_mut() {
             *pixel_value = func(*pixel_value).clamp(0.0f64, 1.0f64);
-        }
+        };
     }
 
     /// Resizes canvas.
@@ -56,15 +58,18 @@ impl Canvas {
 
     /// Renders the canvas to stdout.
     pub fn render(&self) {
-        let mut buffer: Vec<u8> = Vec::with_capacity((self.width + 1) * self.height);
+        let mut buffer: Vec<u8> = Vec::with_capacity((self.width * (1usize + self.equalize_row_column_spacing as usize) + 1usize) * self.height);
         let mut writer: io::Stdout = io::stdout();
 
         for (i, pixel_value) in self.pixels.iter().enumerate() {
             buffer.push(self.brightness_to_char_as_byte(*pixel_value));
+            if self.equalize_row_column_spacing {
+                buffer.push(b' ');
+            };
             if (i + 1) % self.width == 0 {
                 buffer.push(b'\n');
-            }
-        }
+            };
+        };
         writer.write_all(&buffer).unwrap();
         writer.flush().unwrap();
     }
